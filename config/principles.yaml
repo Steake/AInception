@@ -1,0 +1,12 @@
+# Principles configuration (ordered list; earlier = higher priority)
+principles:
+  - name: do_not_harm
+    description: Avoid danger or forbidden zones; prevent self-damage and collateral harm.
+  - name: keep_promises
+    description: Honor registered social promises unless an explicit logged override with proof occurs.
+  - name: conserve_energy
+    description: Prefer actions that keep energy near setpoint and avoid unnecessary expenditure.
+  - name: temperature_stability
+    description: Maintain temperature within comfort band for long-term viability.
+  - name: path_efficiency
+    description: Prefer shorter safe paths once higher principles satisfied.
