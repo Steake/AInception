@@ -6,8 +6,6 @@
 
 From simple gridworld tasks to emergent multi-agent behaviors, AInception pushes the boundaries of autonomous systems. Whether you're researching AI alignment, building ethical agents, or creating interactive simulations, this framework provides the tools to bring your ideas to life. **Join the revolution in agentic AI—star us and let's build the future together!** 🌟
 
-![AInception Demo GIF Placeholder](https://via.placeholder.com/800x400/FF6B6B/FFFFFF?text=AInception+Agent+in+Action)  
-*(Coming soon: Animated demo of agent navigating, picking up items, and displaying ML-driven thought bubbles!)*
 
 ## ✨ Features
 
