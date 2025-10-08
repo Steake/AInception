@@ -1,6 +1,6 @@
 # 🚀 AInception: Constitutional AI Agents with Homeostatic Drives & ML-Powered Visualization
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-orange)](https://pytorch.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Stars](https://img.shields.io/github/stars/Steake/AInception?style=social)](https://github.com/Steake/AInception/stargazers)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/) [![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-orange)](https://pytorch.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![CI Status](https://github.com/Steake/AInception/actions/workflows/ci.yml/badge.svg)](https://github.com/Steake/AInception/actions/workflows/ci.yml) [![Stars](https://img.shields.io/github/stars/Steake/AInception?style=social)](https://github.com/Steake/AInception/stargazers)
 
 **AInception** is a groundbreaking framework for building autonomous AI agents that embody *constitutional AI*, *homeostatic drives*, and *social promise enforcement* in a unified, production-ready system. Imagine agents that not only pursue goals but also balance internal needs (energy, social proximity), adhere to ethical principles, and negotiate promises in dynamic environments—all visualized in an immersive GUI with cutting-edge ML enhancements like diffusion-based planning and multimodal LLMs.
 
@@ -64,9 +64,19 @@ AInception isn't just code—it's a *living ecosystem* where agents evolve, lear
 
 5. **Run Tests**:
    ```bash
+   # Run all tests
    python run_tests.py --all
+   
+   # Run specific test categories
+   python run_tests.py --unit
+   python run_tests.py --integration
+   python run_tests.py --scenarios
+   
+   # Run BDD tests
+   pytest tests/bdd/ --verbose
    ```
    - Validates core agent logic and ML integrations.
+   - BDD tests provide human-readable behavior specifications.
 
 6. **Launch CLI Scenarios**:
    ```bash

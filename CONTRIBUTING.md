@@ -165,7 +165,10 @@ Look for issues labeled `good-first-issue` on GitHub, typically involving:
 tests/
 ├── unit/           # Test individual components
 ├── integration/    # Test full workflows
-└── scenarios/      # Specific agent scenarios
+├── scenarios/      # Specific agent scenarios
+└── bdd/           # Behavior-Driven Development tests
+    ├── features/   # Gherkin feature files
+    └── step_defs/  # Step definition implementations
 ```
 
 ### Running Tests
@@ -178,6 +181,12 @@ python run_tests.py --unit
 python run_tests.py --integration
 python run_tests.py --scenarios
 
+# BDD tests
+pytest tests/bdd/ --verbose
+
+# Specific BDD feature
+pytest tests/bdd/step_defs/test_navigation_steps.py
+
 # Verbose output
 python run_tests.py --all --verbose
 ```
@@ -186,6 +195,51 @@ python run_tests.py --all --verbose
 - Aim for >90% code coverage
 - Test both happy path and edge cases
 - Mock external dependencies (OpenAI API, file I/O)
+
+### Writing BDD Tests
+
+BDD (Behavior-Driven Development) tests use Gherkin syntax to describe behavior in natural language:
+
+**Feature File Example** (`tests/bdd/features/my_feature.feature`):
+```gherkin
+Feature: Agent Navigation
+  As an AI agent
+  I want to navigate to goals
+  So that I can complete objectives
+
+  Scenario: Agent reaches goal
+    Given the agent starts at position (0, 0)
+    And the goal is at position (5, 5)
+    When the agent navigates for up to 50 steps
+    Then the agent should reach the goal
+```
+
+**Step Definitions** (`tests/bdd/step_defs/test_my_steps.py`):
+```python
+from pytest_bdd import scenarios, given, when, then
+
+scenarios('../features/my_feature.feature')
+
+@given("the agent starts at position (0, 0)")
+def agent_at_origin(context):
+    context['start_pos'] = (0, 0)
+
+@then("the agent should reach the goal")
+def reaches_goal(context):
+    assert context['goal_reached']
+```
+
+See `tests/bdd/README.md` for detailed BDD testing guidelines.
+
+### Continuous Integration
+
+All PRs automatically run through GitHub Actions CI which:
+- Tests against Python 3.10, 3.11, and 3.12
+- Runs all test categories (unit, integration, scenarios, BDD)
+- Generates coverage reports
+- Caches dependencies for faster builds
+
+Check the Actions tab for build status and detailed logs.
 
 ## 📝 Documentation Standards
 
