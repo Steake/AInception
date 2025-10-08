@@ -113,6 +113,139 @@ For advanced ML features (e.g., diffusion planning, LLM goal decomposition):
 - Check `viz/` directory for modules like `diffusion_planner.py` and `llm_module.py`.
 - Experiment with creativity sliders and feedback loops in the GUI!
 
+## 🧪 Testing Framework
+
+AInception includes a comprehensive testing suite with 30+ tests covering all core functionality. The framework uses both traditional unit/integration tests and modern BDD (Behavior-Driven Development) specifications.
+
+### Test Categories
+
+#### 1. Unit Tests (21 tests)
+Tests individual components in isolation:
+
+```bash
+python run_tests.py --unit --verbose
+```
+
+**Coverage:**
+- **Drive System** (5 tests): Homeostatic drive initialization, updates, error calculation, and projection
+- **Constitution** (4 tests): Principle loading, evaluation, ranking, and proof validation
+- **Promise Book** (7 tests): Registration, lifecycle, breach detection, expiry, penalties, and serialization
+- **Imagination** (5 tests): Single/multi-step rollouts, drive projection, risk assessment, horizon planning
+
+**Example Output:**
+```
+test_drive_errors ... ok
+test_principle_evaluation ... ok
+test_promise_lifecycle ... ok
+test_risk_assessment ... ok
+
+Ran 21 tests in 0.002s - ✅ All tests passed!
+Success rate: 100.0%
+```
+
+#### 2. BDD Tests (9 scenarios)
+Human-readable behavior specifications using Gherkin syntax:
+
+```bash
+pytest tests/bdd/ --verbose
+```
+
+**Features:**
+- **Agent Navigation**: Goal reaching, obstacle avoidance, energy management
+- **Promise Keeping**: Resisting temptations, principle adherence, time pressure
+- **Drive Management**: Energy maintenance, multi-drive balancing, urgency response
+
+**Example Output:**
+```
+tests/bdd/step_defs/test_navigation_steps.py::test_agent_reaches_goal_without_obstacles PASSED [ 44%]
+tests/bdd/step_defs/test_promise_steps.py::test_agent_resists_shortcut_temptation PASSED [ 77%]
+tests/bdd/step_defs/test_drive_steps.py::test_agent_maintains_energy_levels PASSED [ 11%]
+
+============================== 9 passed in 2.30s ===============================
+```
+
+#### 3. Integration Tests
+End-to-end workflow validation:
+
+```bash
+python run_tests.py --integration --verbose
+```
+
+Tests full agent-environment interactions including multi-step planning, drive dynamics, and principle enforcement.
+
+#### 4. Scenario Tests
+Acceptance criteria validation for specific agent behaviors:
+
+```bash
+python run_tests.py --scenarios --verbose
+```
+
+Validates Day 1/2 acceptance criteria including promise temptation resistance, drive sacrifice for principles, and goal adaptation under perturbations.
+
+### Running All Tests
+
+```bash
+# Run complete test suite
+python run_tests.py --all
+
+# Run with coverage report
+python run_tests.py --coverage
+
+# Run specific BDD feature
+pytest tests/bdd/step_defs/test_navigation_steps.py -v
+```
+
+### Test Structure
+
+```
+tests/
+├── unit/                  # Component-level tests
+├── integration/           # Full workflow tests
+├── scenarios/            # Acceptance criteria tests
+└── bdd/                  # Behavior-Driven Development tests
+    ├── features/         # Gherkin feature files
+    │   ├── agent_navigation.feature
+    │   ├── promise_keeping.feature
+    │   └── drive_management.feature
+    └── step_defs/        # Step implementations
+        ├── test_navigation_steps.py
+        ├── test_promise_steps.py
+        └── test_drive_steps.py
+```
+
+### Example BDD Test
+
+```gherkin
+Feature: Promise Keeping
+  As an AI agent with constitutional principles
+  I want to honor my registered promises
+  So that I maintain my integrity
+
+  Scenario: Agent resists shortcut temptation
+    Given the agent starts at position (0, 0)
+    And the goal is at position (6, 6)
+    And the agent has promised to avoid position (3, 3)
+    When the agent navigates for up to 100 steps
+    Then the agent should not violate the promise
+    And the agent should make progress toward the goal
+```
+
+### Continuous Integration
+
+All tests run automatically via GitHub Actions on every push and pull request:
+
+[![CI Status](https://github.com/Steake/AInception/actions/workflows/ci.yml/badge.svg)](https://github.com/Steake/AInception/actions/workflows/ci.yml)
+
+The CI pipeline:
+- Tests against Python 3.10, 3.11, and 3.12
+- Runs all test categories (unit, integration, scenarios, BDD)
+- Caches dependencies for faster builds
+- Generates coverage reports
+
+**📖 For complete testing documentation with examples and output screenshots, see [docs/TESTING.md](docs/TESTING.md).**
+
+For detailed testing guidelines and contribution workflow, see [CONTRIBUTING.md](CONTRIBUTING.md#-testing-guidelines).
+
 ## 🏗️ Architecture Overview
 
 AInception follows a modular, event-driven design:
@@ -162,6 +295,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines. Join our Discord for disc
 
 ## 📚 Documentation
 
+- [Testing Guide](docs/TESTING.md): **Complete testing documentation with examples and outputs** 🧪
 - [Architecture Spec](.github/chatmodes/ML_Architecture_AInception.md): Deep dive into ML enhancements.
 - [Implementation Summary](IMPLEMENTATION_SUMMARY.md): Test results and validation.
 - [API Reference](docs/API.md): Module docs and examples.
