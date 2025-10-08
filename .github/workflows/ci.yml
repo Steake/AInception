@@ -51,7 +51,32 @@ jobs:
       run: |
         pytest tests/bdd/ --verbose || echo "BDD tests not yet implemented"
     
+    - name: Run E2E tests
+      run: |
+        python -m pytest tests/test_e2e.py -v -s
+      continue-on-error: false
+    
     - name: Generate coverage report
       run: |
         python run_tests.py --coverage
       continue-on-error: true
+    
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-results-python-${{ matrix.python-version }}
+        path: |
+          /tmp/e2e_test_report.json
+          /tmp/e2e_performance_metrics.json
+        retention-days: 30
+    
+    - name: Upload test logs
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-logs-python-${{ matrix.python-version }}
+        path: |
+          *.log
+        retention-days: 7
+        if-no-files-found: ignore

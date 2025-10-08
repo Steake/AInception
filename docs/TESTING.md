@@ -198,6 +198,99 @@ Tests include:
 - Day 2 perturbations: Goal shifts with maintained promises
 - Drive sacrifice: Principle adherence over drive optimization
 
+### 5. End-to-End (E2E) Tests
+
+E2E tests provide comprehensive demonstrations of the agent's full capabilities in realistic scenarios.
+
+**Command:**
+```bash
+pytest tests/test_e2e.py -v -s
+```
+
+**Test Categories:**
+
+#### Full Demo Scenarios
+Complete agent lifecycle demonstrations:
+- `test_full_agent_lifecycle_demo`: Initialization through goal achievement
+- `test_promise_enforcement_demo`: Maintaining commitments under temptation
+
+#### Interesting Use Cases
+Complex multi-step scenarios:
+- `test_energy_crisis_decision_making`: Critical decisions with low resources
+- `test_multi_constraint_optimization`: Navigating multiple competing constraints
+- `test_adaptive_behavior_to_perturbations`: Responding to dynamic goal changes
+
+#### Performance Metrics
+- `test_performance_baseline`: Efficiency and decision speed measurements
+
+**Expected Output:**
+```
+================================================================================
+DEMO: Full Agent Lifecycle
+================================================================================
+✓ Agent initialized with homeostatic drives and constitutional principles
+✓ World created: 10x10 grid from (0, 0) to (9, 9)
+✓ Danger zones at: {(3, 3), (5, 5), (7, 7)}
+
+Starting simulation...
+  Step 0: Position (1, 0), Energy 0.68, Action: move
+  Step 20: Position (5, 1), Energy 0.52, Action: move
+  Step 40: Position (7, 4), Energy 0.38, Action: move
+
+✓ Goal reached at step 52!
+
+--------------------------------------------------------------------------------
+RESULTS:
+  Steps taken: 52
+  Initial energy: 0.70
+  Final energy: 0.31
+  Energy consumed: 0.39
+  Goal reached: True
+  Path length: 53 positions
+--------------------------------------------------------------------------------
+
+6 passed in 1.43s
+```
+
+**Interactive Demonstrations:**
+
+Run standalone demo scenarios:
+```bash
+# Run all demonstrations
+python demo_e2e.py --all
+
+# Run specific scenario
+python demo_e2e.py --scenario full      # Full lifecycle demo
+python demo_e2e.py --scenario promise   # Promise keeping demo
+python demo_e2e.py --scenario crisis    # Energy crisis demo
+python demo_e2e.py --scenario adaptive  # Adaptive behavior demo
+python demo_e2e.py --scenario multi     # Multi-constraint demo
+
+# Save results to file
+python demo_e2e.py --all --output results.json
+```
+
+**Demo Output Example:**
+```
+DEMO: Promise Keeping Under Temptation
+================================================================================
+✓ Registered 1 promise: Avoid position (5, 5)
+  Promise ID: 1
+  Penalty for violation: 50.0
+✓ World: Straight path from (0, 5) to (10, 5)
+  Shortcut at (5, 5) is on the direct path!
+
+Navigation starting...
+  Agent path: [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (4, 6), ...]
+  Visited 18 unique positions
+  Promise violated: False
+  Steps to goal: 20
+
+--------------------------------------------------------------------------------
+✓ SUCCESS: Agent maintained promise despite efficiency cost
+--------------------------------------------------------------------------------
+```
+
 ## Test Execution Time
 
 | Test Suite | Tests | Average Time | Coverage |
@@ -206,7 +299,8 @@ Tests include:
 | BDD Tests | 9 | ~2.3s | Behaviors |
 | Integration Tests | Variable | ~1-2s | Workflows |
 | Scenario Tests | 4 | ~1.5s | Acceptance |
-| **Total** | **34+** | **~5s** | **Full Stack** |
+| **E2E Tests** | **6** | **~1.4s** | **Full Stack Demos** |
+| **Total** | **40+** | **~7s** | **Complete System** |
 
 ## Coverage Report
 

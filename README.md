@@ -182,6 +182,53 @@ python run_tests.py --scenarios --verbose
 
 Validates Day 1/2 acceptance criteria including promise temptation resistance, drive sacrifice for principles, and goal adaptation under perturbations.
 
+#### 5. End-to-End (E2E) Tests
+Comprehensive demonstrations of full agent capabilities:
+
+```bash
+pytest tests/test_e2e.py -v
+```
+
+**Demonstrations include:**
+- **Full Agent Lifecycle**: Complete initialization to goal achievement
+- **Promise Enforcement**: Maintaining commitments under temptation
+- **Energy Crisis**: Critical decision making with low resources
+- **Adaptive Behavior**: Responding to mid-simulation goal changes
+- **Multi-Constraint Optimization**: Navigating complex constraint landscapes
+- **Performance Baseline**: Measuring efficiency and decision speed
+
+**Example E2E test output:**
+```
+DEMO: Promise Enforcement Under Temptation
+================================================================================
+✓ Registered 1 promise: Avoid position (5, 5)
+  Promise ID: 1
+  Penalty for violation: 50.0
+✓ World: Straight path from (0, 5) to (10, 5)
+  Shortcut at (5, 5) is on the direct path!
+
+  Agent path: [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (4, 6), (5, 6), ...]
+  Visited 18 unique positions
+  Promise violated: False
+  Steps to goal: 20
+
+✓ SUCCESS: Agent maintained promise despite efficiency cost
+```
+
+**Interactive Demos:**
+Run standalone demonstrations:
+```bash
+# Run all demonstrations
+python demo_e2e.py --all
+
+# Run specific scenario
+python demo_e2e.py --scenario full      # Full lifecycle
+python demo_e2e.py --scenario promise   # Promise keeping
+python demo_e2e.py --scenario crisis    # Energy crisis
+python demo_e2e.py --scenario adaptive  # Adaptive behavior
+python demo_e2e.py --scenario multi     # Multi-constraint
+```
+
 ### Running All Tests
 
 ```bash
